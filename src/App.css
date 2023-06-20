@@ -15,10 +15,11 @@ place-items: center;
 }
 
 .app__videos {
+
 border-radius: 20px;
 height: 100vh;
 max-height: 800px;
-width: 50%;
+width: 80%;
 max-width: 500px;
 border: 1px solid black;
 overflow: scroll;
