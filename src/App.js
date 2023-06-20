@@ -1,29 +1,43 @@
+import React, { useEffect, useState } from "react";
+
 import "./App.css";
 import Video from "./pages/Video";
+import db from "./config/Firebase";
+
+import { collection, getDocs } from "firebase/firestore/lite";
+
 function App() {
+  const [video, setVideo] = useState([]);
+
+  async function getVideos() {
+    const videosCollections = collection(db, "videos");
+    const videosSnapshots = await getDocs(videosCollections);
+    const videosList = videosSnapshots.docs.map((doc) => doc.data());
+    setVideo(videosList);
+  }
+
+  useEffect(() => {
+    getVideos();
+  }, []);
+
   return (
     <div className="App">
       <div className="app__videos">
-        <Video
-          likes={100}
-          messages={200}
-          shares={400}
-          name="teste"
-          description="gato pulando"
-          music="musica epica"
-          url="https://poqlymuephttfsljdabn.supabase.co/storage/v1/object/public/jornadadev/brecker2.mp4?t=2023-05-22T19%3A37%3A45.885Z"
-        />
+        {video.map((item) => {
+          return (
+            <Video
+              likes={item.likes}
+              messages={item.messages}
+              shares={item.shares}
+              name={item.name}
+              description={item.description}
+              music={item.music}
+              url={item.url}
+            />
+          );
+        })}
 
-        <Video
-          likes={214}
-          messages={1}
-          shares={27}
-          name="pedro"
-          description="gato pulante"
-          music="musica empolgante"
-          url="https://poqlymuephttfsljdabn.supabase.co/storage/v1/object/public/jornadadev/bird.mp4?t=2023-05-22T19%3A40%3A47.052Z"
-
-        />
+        {/*  */}
       </div>
     </div>
   );
