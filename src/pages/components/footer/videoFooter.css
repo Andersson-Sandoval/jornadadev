@@ -25,7 +25,7 @@ display: flex;
 
 .videoFooterMusic__text {
     border-radius: 10px;
-    width: 78%;
+    width: 75%;
     overflow-x: hidden;
 
 }
@@ -75,3 +75,17 @@ display: flex;
 
 }
 
+
+@media  only screen and (max-width: 440x) {
+
+    .videoFooter{
+   bottom: 22%;
+     }
+
+     .videoFooterMusic__text{
+
+        width: 78%;
+     }
+   
+   
+   }
